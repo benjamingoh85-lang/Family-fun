@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SG Family Fun Planner (2026 Edition)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Top Banner -->
+    <header class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight flex items-center gap-2">
+                    <i class="fa-solid fa-map-location-dot"></i> SG Family Fun Planner
+                </h1>
+                <p class="text-teal-100 text-sm mt-1">Tailored for 4-Month-Old Infant & 3.5-Year-Old Toddler</p>
+            </div>
+            <div class="bg-white/10 px-4 py-2 rounded-lg text-xs backdrop-blur-sm border border-white/10 text-center md:text-right">
+                <span class="block font-semibold">📅 Current Season: June 2026</span>
+                <span class="text-teal-200">Optimal itineraries balancing pram access & nursing rooms</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left Sidebar: Configuration & API Live Connection -->
+        <div class="lg:col-span-1 space-y-6">
+            
+            <!-- Family Profile Card -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+                <h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-users text-teal-600"></i> Fixed Family Context
+                </h2>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between items-center p-2 bg-slate-50 rounded-lg">
+                        <span class="font-medium text-slate-600">👧 Daughter (Sep 2022)</span>
+                        <span class="bg-teal-100 text-teal-800 text-xs px-2 py-0.5 rounded-full font-semibold">~3.5 Years</span>
+                    </div>
+                    <div class="flex justify-between items-center p-2 bg-slate-50 rounded-lg">
+                        <span class="font-medium text-slate-600">👶 Son (Feb 2026)</span>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-0.5 rounded-full font-semibold">~4 Months</span>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-amber-50 text-amber-800 text-xs rounded-xl flex items-start gap-2 border border-amber-100">
+                    <i class="fa-solid fa-circle-info mt-0.5 text-amber-600"></i>
+                    <div>
+                        <strong>Planning Strategy:</strong> Highly prioritizes extensive diaper-changing facilities, standard stroller accessibility, and fully shaded/indoor areas to combat high heat.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gemini Live AI Engine Connection -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 border-t-4 border-t-teal-600">
+                <h2 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-brain text-teal-600"></i> Connect Gemini AI
+                </h2>
+                <p class="text-xs text-slate-500 mb-4">Provide a Gemini API Key to fetch dynamic alternatives utilizing contextual instructions.</p>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">GEMINI API KEY</label>
+                        <div class="relative">
+                            <input type="password" id="apiKey" class="w-full pl-8 pr-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="AIzaSy...">
+                            <i class="fa-solid fa-key absolute left-2.5 top-3 text-slate-400 text-xs"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">TREND MODE / CORE FOCUS</label>
+                        <select id="trendContext" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white">
+                            <option value="Social media trending popups & interactive sensory installations for mid-2026">🔥 2026 Social Media Trends (Pop-ups & Visuals)</option>
+                            <option value="Maximum indoor air-conditioned spaces with premium nursery infrastructure">❄️ Indoor Air-Con Comfort (Heat/Rain Safe)</option>
+                            <option value="Free-of-charge premium sensory parks & splash zones for budget days">🌳 Nature & Free Splash Playgrounds</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">TIMING PREFERENCE</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="flex items-center gap-2 p-2 border border-slate-200 rounded-xl text-xs cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="timing" value="Weekend (Expect crowds, maximize high-energy events)" checked class="text-teal-600"> Weekend
+                            </label>
+                            <label class="flex items-center gap-2 p-2 border border-slate-200 rounded-xl text-xs cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="timing" value="Weekday morning/afternoon (Quieter, look for school holiday gaps)" class="text-teal-600"> Weekday
+                            </label>
+                        </div>
+                    </div>
+
+                    <button onclick="generateCustomRecommendations()" id="btnGenerate" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2.5 px-4 rounded-xl text-sm shadow-sm transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Dynamic Ideas
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panels: Current Curated Recommendations & AI Output Area -->
+        <div class="lg:col-span-2 space-y-6">
+            
+            <!-- AI Response Section (Hidden initially until user makes a request) -->
+            <div id="aiResponseContainer" class="hidden bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100 p-6 rounded-2xl shadow-md border border-slate-700 transition-all duration-300">
+                <div class="flex justify-between items-center border-b border-slate-700 pb-3 mb-4">
+                    <h3 class="text-md font-bold tracking-wide text-emerald-400 uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-sparkles animate-pulse"></i> Gemini Live 2026 Generation
+                    </h3>
+                    <button onclick="closeAiContainer()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div id="aiMarkdownBody" class="prose prose-invert max-w-none text-sm leading-relaxed whitespace-pre-wrap font-mono text-slate-300">
+                    Generating customized tactical options...
+                </div>
+            </div>
+
+            <!-- Pre-Loaded Top Curated Hotspots (June 2026 Trends) -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold text-slate-800 tracking-tight flex items-center gap-2">
+                    <i class="fa-solid fa-fire-flame-curved text-amber-500"></i> Top Trending Hotspots (June 2026)
+                </h2>
+                
+                <!-- Card 1: Disney Garden of Wonder -->
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:border-teal-200 transition">
+                    <div class="flex justify-between items-start gap-2 flex-wrap">
+                        <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">Limited-Time 2026 Blockbuster</span>
+                        <span class="text-emerald-600 font-bold text-sm"><i class="fa-solid fa-ticket-simple"></i> $12 SG Residents (Free &lt;3yo)</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Disney Garden of Wonder @ Floral Fantasy</h3>
+                    <p class="text-slate-600 text-sm mt-1">Massive character topiary zones including Frozen & Toy Story 5, ending with a local Singapore heritage design theme showcase.</p>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                        <div><strong class="text-teal-600">👧 For Toddler:</strong> Stunning Disney visuals, interactive stamps, and completely flat pathways.</div>
+                        <div><strong class="text-emerald-600">👶 For Infant:</strong> Fully climate-controlled dome, pristine changing stations inside Floral Fantasy.</div>
+                    </div>
+                </div>
+
+                <!-- Card 2: WonderGround -->
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:border-teal-200 transition">
+                    <div class="flex justify-between items-start gap-2 flex-wrap">
+                        <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">New 2026 Permanent Launch</span>
+                        <span class="text-slate-500 font-medium text-xs"><i class="fa-solid fa-clock"></i> Best for Quiet Weekdays</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">WonderGround Sensory Play Space</h3>
+                    <p class="text-slate-600 text-sm mt-1">An interactive underground world concept custom-engineered by local designers specifically for early development and sensory coordination.</p>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                        <div><strong class="text-teal-600">👧 For Toddler:</strong> Textured climbing crawl-spaces and safe light-reflection structures.</div>
+                        <div><strong class="text-emerald-600">👶 For Infant:</strong> Ambient high-contrast tactile installations safe for close-range parent lap viewing.</div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Mandai Exploria & Curiosity Cove -->
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:border-teal-200 transition">
+                    <div class="flex justify-between items-start gap-2 flex-wrap">
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">Trending Eco-Hub</span>
+                        <span class="text-amber-600 font-bold text-sm"><i class="fa-solid fa-shield-halved"></i> High-End Nursing Facilities</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Curiosity Cove @ Mandai Wildlife Reserve</h3>
+                    <p class="text-slate-600 text-sm mt-1">The indoor multimedia-and-play addition to the reserve, allowing families to completely escape high afternoon humidity spikes.</p>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                        <div><strong class="text-teal-600">👧 For Toddler:</strong> Safe indoor nature discovery puzzles and digital ecosystem mappings.</div>
+                        <div><strong class="text-emerald-600">👶 For Infant:</strong> Quiet pockets outside primary screaming sound zones for pram naps.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-slate-100 border-t border-slate-200 text-center py-6 text-xs text-slate-400 mt-12">
+        Singapore Family Activities Recommendation Tool • Powered by Gemini API Framework
+    </footer>
+
+    <!-- Core Script Logic Integration -->
+    <script>
+        function closeAiContainer() {
+            document.getElementById('aiResponseContainer').classList.add('hidden');
+        }
+
+        async function generateCustomRecommendations() {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const trendContext = document.getElementById('trendContext').value;
+            const timingElement = document.querySelector('input[name="timing"]:checked');
+            const timing = timingElement ? timingElement.value : 'Weekend';
+            
+            if (!apiKey) {
+                alert("Please enter a valid Gemini API Key to make a real-time request.");
+                return;
+            }
+
+            const container = document.getElementById('aiResponseContainer');
+            const body = document.getElementById('aiMarkdownBody');
+            const btn = document.getElementById('btnGenerate');
+
+            // UI State updates
+            container.classList.remove('hidden');
+            body.innerHTML = `<div class="flex items-center gap-2 text-emerald-400 font-sans"><i class="fa-solid fa-spinner animate-spin"></i> Querying Gemini API based on 2026 data models...</div>`;
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+
+            // Explicit context building ensuring the model avoids unsafe or age-inappropriate matches
+            const promptStr = `Act as an expert local parent-concierge in Singapore. Recommend specific custom options for an outdoor/indoor day plan based on these parameters:
+- Family: 2 Adults + 2 Kids (Daughter born Sept 2022 -> ~3.5yo Toddler; Son born Feb 2026 -> ~4-month-old Infant).
+- Timing Focus: ${timing}.
+- Strategic Direction: ${trendContext}.
+
+Strict Safety & Practical Constraints:
+1. Ensure every location chosen has smooth ramp/lift routes for high-end heavy-duty prams.
+2. Ensure locations include dedicated air-conditioned nursing rooms or premium changing points within 3 minutes of walking distance.
+3. Recommend specific dining options that offer wide multi-stroller seating access.
+4. Separate recommendations out explicitly with clear bullet points. Avoid generating long block paragraphs.`;
+
+            try {
+                // Connecting to the Gemini Pro structural models endpoint
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: promptStr }] }]
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.candidates && data.candidates[0].content.parts[0].text) {
+                    let textResult = data.candidates[0].content.parts[0].text;
+                    // Simple regex converter to transform base level Markdown styling lists gracefully in pre-wrap layout
+                    textResult = textResult.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
+                    textResult = textResult.replace(/^\s*\*\s(.*)$/gmd, '• $1');
+                    body.innerHTML = `<div class="font-sans space-y-2 text-slate-200">${textResult}</div>`;
+                } else {
+                    body.innerHTML = `<span class="text-rose-400 font-sans">API returned an empty payload pattern. Check configuration or authorization limits.</span>`;
+                }
+
+            } catch (err) {
+                console.error(err);
+                body.innerHTML = `<span class="text-rose-400 font-sans">Error connecting to endpoint: ${err.message}</span>`;
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('opacity-50');
+            }
+        }
+    </script>
+</body>
+</html>
