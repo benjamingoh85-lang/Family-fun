@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic SG Family Planner</title>
+    <title>Dynamic SG Family Planner (2026)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -19,11 +19,14 @@
                 <p class="text-xs text-slate-400 mt-0.5">Dynamic 2026 planning for ages ~3.5yo (Sept 2022) & ~4mo (Feb 2026)</p>
             </div>
             
-            <!-- API Control Panel -->
+            <!-- API Control Panel (Auto-saves locally) -->
             <div class="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
-                <input type="password" id="apiKey" class="w-full sm:w-64 bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-teal-500" placeholder="Enter Gemini API Key (AIzaSy...)">
-                <button onclick="fetchAllRecommendations()" id="btnFetch" class="w-full sm:w-auto bg-teal-500 hover:bg-teal-600 text-slate-950 font-bold text-xs px-4 py-2 rounded-xl transition dynamic-preset-btn flex items-center justify-center gap-1.5 whitespace-nowrap">
-                    <i class="fa-solid fa-sync"></i> Refresh All 12 Places
+                <div class="relative w-full sm:w-64">
+                    <input type="password" id="apiKey" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-xl pl-8 pr-3 py-2.5 focus:outline-none focus:border-teal-500 transition-colors" placeholder="Enter Gemini API Key...">
+                    <i class="fa-solid fa-key absolute left-3 top-3 text-slate-500 text-xs"></i>
+                </div>
+                <button onclick="fetchAllRecommendations()" id="btnFetch" class="w-full sm:w-auto bg-teal-500 hover:bg-teal-600 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition flex items-center justify-center gap-2 whitespace-nowrap shadow-lg shadow-teal-500/20">
+                    <i class="fa-solid fa-sync"></i> Refresh 12 Places
                 </button>
             </div>
         </div>
@@ -32,23 +35,23 @@
     <main class="max-w-7xl mx-auto px-4 py-8">
         <!-- Initial State Welcome Message -->
         <div id="welcomeState" class="text-center py-16 max-w-md mx-auto">
-            <div class="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 text-teal-400 border border-slate-700">
-                <i class="fa-solid fa-key"></i>
+            <div class="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 text-teal-400 border border-slate-700 shadow-inner">
+                <i class="fa-solid fa-satellite-dish"></i>
             </div>
-            <h2 class="text-lg font-bold text-white">Connect the Gemini Engine</h2>
-            <p class="text-slate-400 text-sm mt-1">Provide your API key above to instantly extract live social trends, climate-controlled hubs, and local green fields calibrated to your children's ages.</p>
+            <h2 class="text-lg font-bold text-white">Live 2026 Radar Engine</h2>
+            <p class="text-slate-400 text-sm mt-2 leading-relaxed">Enter your key to extract live social trends, climate-controlled hubs, and green fields calibrated perfectly for a toddler and an infant. <strong class="text-teal-400 font-medium">Your key will be securely saved in this browser for next time.</strong></p>
         </div>
 
         <!-- Loader -->
         <div id="loadingState" class="hidden text-center py-20">
-            <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-teal-500/30 border-t-teal-400 mb-4"></div>
-            <p class="text-sm text-slate-400">Querying Gemini live models & generating structural matrices...</p>
+            <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-slate-700 border-t-teal-400 mb-4 shadow-lg shadow-teal-500/20"></div>
+            <p class="text-sm text-slate-400 font-medium tracking-wide">Querying Gemini 3.5 Flash & generating structural matrices...</p>
         </div>
 
         <!-- Error Panel -->
-        <div id="errorState" class="hidden max-w-md mx-auto bg-rose-950/40 border border-rose-800 text-rose-200 p-4 rounded-xl text-sm text-center mb-8">
-            <i class="fa-solid fa-triangle-exclamation text-rose-400 mb-1 block text-lg"></i>
-            <span id="errorMessage">Failed to generate content.</span>
+        <div id="errorState" class="hidden max-w-xl mx-auto bg-rose-950/40 border border-rose-800/50 text-rose-200 p-5 rounded-2xl text-sm text-center mb-8 backdrop-blur-sm">
+            <i class="fa-solid fa-triangle-exclamation text-rose-400 mb-2 block text-2xl animate-pulse"></i>
+            <span id="errorMessage" class="font-medium">Failed to generate content.</span>
         </div>
 
         <!-- Result Grid Systems (3 Columns) -->
@@ -56,27 +59,27 @@
             
             <!-- Category 1: Social Media Trending -->
             <div class="space-y-4">
-                <div class="flex items-center gap-2 px-1 border-b border-slate-800 pb-2">
-                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                    <h2 class="font-bold text-sm tracking-wider uppercase text-slate-300">🔥 Trending Right Now</h2>
+                <div class="flex items-center gap-2 px-1 border-b border-slate-800 pb-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)] animate-pulse"></span>
+                    <h2 class="font-bold text-sm tracking-widest uppercase text-slate-200">🔥 Trending Now</h2>
                 </div>
                 <div id="colTrending" class="space-y-4"></div>
             </div>
 
             <!-- Category 2: Indoor & Air-Con -->
             <div class="space-y-4">
-                <div class="flex items-center gap-2 px-1 border-b border-slate-800 pb-2">
-                    <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
-                    <h2 class="font-bold text-sm tracking-wider uppercase text-slate-300">❄️ Indoor Air-Con Comfort</h2>
+                <div class="flex items-center gap-2 px-1 border-b border-slate-800 pb-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.6)]"></span>
+                    <h2 class="font-bold text-sm tracking-widest uppercase text-slate-200">❄️ Air-Con Comfort</h2>
                 </div>
                 <div id="colIndoor" class="space-y-4"></div>
             </div>
 
             <!-- Category 3: Free & Nature -->
             <div class="space-y-4">
-                <div class="flex items-center gap-2 px-1 border-b border-slate-800 pb-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                    <h2 class="font-bold text-sm tracking-wider uppercase text-slate-300">🌳 Free & Nature Parks</h2>
+                <div class="flex items-center gap-2 px-1 border-b border-slate-800 pb-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
+                    <h2 class="font-bold text-sm tracking-widest uppercase text-slate-200">🌳 Free & Nature</h2>
                 </div>
                 <div id="colNature" class="space-y-4"></div>
             </div>
@@ -85,13 +88,26 @@
     </main>
 
     <script>
+        // --- On Page Load: Check Local Storage ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedKey = localStorage.getItem('gemini_api_key_2026');
+            if (savedKey) {
+                document.getElementById('apiKey').value = savedKey;
+            }
+        });
+
+        // --- Main Fetch Function ---
         async function fetchAllRecommendations() {
-            const apiKey = document.getElementById('apiKey').value.trim();
-            if (!apiKey) {
+            const apiKeyInput = document.getElementById('apiKey').value.trim();
+            if (!apiKeyInput) {
                 alert("Please provide an API Key first.");
                 return;
             }
 
+            // Save the key to the browser so the user doesn't have to type it again tomorrow
+            localStorage.setItem('gemini_api_key_2026', apiKeyInput);
+
+            // UI Elements
             const welcomeState = document.getElementById('welcomeState');
             const loadingState = document.getElementById('loadingState');
             const errorState = document.getElementById('errorState');
@@ -104,6 +120,7 @@
             resultGrid.classList.add('hidden');
             loadingState.classList.remove('hidden');
             btn.disabled = true;
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
             btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Processing...`;
 
             // Prompt optimized to get cleanly structured JSON back
@@ -120,7 +137,9 @@ The JSON object must match this exact schema structure:
 Provide EXACTLY 4 entries in each array. Do not return markdown wraps around the JSON object, just output the clean valid stringified JSON text directly.`;
 
             try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+                // FIXED FOR 2026: Using the current gemini-3.5-flash endpoint
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKeyInput}`;
+                
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -132,49 +151,73 @@ Provide EXACTLY 4 entries in each array. Do not return markdown wraps around the
                     })
                 });
 
-                if (!response.ok) throw new Error(`HTTP network fault status: ${response.status}`);
+                if (!response.ok) {
+                    if (response.status === 400) throw new Error("400 Bad Request: Check if your API key is correct.");
+                    if (response.status === 403) throw new Error("403 Forbidden: API key may be invalid or missing permissions.");
+                    if (response.status === 404) throw new Error("404 Not Found: The model endpoint may have been updated.");
+                    throw new Error(`HTTP network fault status: ${response.status}`);
+                }
                 
                 const responseData = await response.json();
+                
+                // Extracting text from Gemini's JSON response structure
                 const rawJsonText = responseData.candidates[0].content.parts[0].text;
                 const parsedData = JSON.parse(rawJsonText);
 
                 // Populate columns
-                renderColumn('colTrending', parsedData.trending, 'border-amber-500/20', 'text-amber-400');
-                renderColumn('colIndoor', parsedData.indoor, 'border-cyan-500/20', 'text-cyan-400');
-                renderColumn('colNature', parsedData.nature, 'border-emerald-500/20', 'text-emerald-400');
+                renderColumn('colTrending', parsedData.trending, 'border-amber-500/30', 'text-amber-400', 'bg-amber-500/10');
+                renderColumn('colIndoor', parsedData.indoor, 'border-cyan-500/30', 'text-cyan-400', 'bg-cyan-500/10');
+                renderColumn('colNature', parsedData.nature, 'border-emerald-500/30', 'text-emerald-400', 'bg-emerald-500/10');
 
+                // Reveal Grid
                 loadingState.classList.add('hidden');
                 resultGrid.classList.remove('hidden');
 
             } catch (err) {
                 console.error(err);
-                document.getElementById('errorMessage').innerText = `Error: ${err.message}. Double check your API key scope configurations.`;
+                document.getElementById('errorMessage').innerText = `${err.message}`;
                 loadingState.classList.add('hidden');
                 errorState.classList.remove('hidden');
             } finally {
+                // Reset Button
                 btn.disabled = false;
-                btn.innerHTML = `<i class="fa-solid fa-sync"></i> Refresh All 12 Places`;
+                btn.classList.remove('opacity-70', 'cursor-not-allowed');
+                btn.innerHTML = `<i class="fa-solid fa-sync"></i> Refresh 12 Places`;
             }
         }
 
-        function renderColumn(elementId, items, borderTheme, textTheme) {
+        // --- Helper Function to Render Cards ---
+        function renderColumn(elementId, items, borderTheme, textTheme, badgeTheme) {
             const column = document.getElementById(elementId);
-            column.innerHTML = ''; // Reset container content
+            column.innerHTML = ''; 
+
+            if (!items || !items.length) {
+                column.innerHTML = '<p class="text-xs text-slate-500">No data generated.</p>';
+                return;
+            }
 
             items.forEach(item => {
                 const card = document.createElement('div');
-                card.className = `bg-slate-800/60 border ${borderTheme} p-4 rounded-xl space-y-3 shadow-sm hover:scale-[1.01] transition-all duration-200`;
+                card.className = `bg-slate-800/80 border ${borderTheme} p-5 rounded-2xl space-y-3 shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300`;
                 card.innerHTML = `
                     <div>
-                        <div class="flex justify-between items-start gap-2">
-                            <h3 class="font-bold text-white text-md tracking-tight">${item.name}</h3>
+                        <div class="flex justify-between items-start gap-2 mb-1.5">
+                            <h3 class="font-bold text-white text-base leading-tight">${item.name}</h3>
                         </div>
-                        <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold"><i class="fa-solid fa-location-dot ${textTheme}"></i> ${item.area}</span>
-                        <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">${item.desc}</p>
+                        <span class="${badgeTheme} ${textTheme} text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-md inline-flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot"></i> ${item.area}
+                        </span>
+                        <p class="text-sm text-slate-300 mt-2.5 leading-relaxed">${item.desc}</p>
                     </div>
-                    <div class="bg-slate-900/40 p-2 rounded-lg space-y-1.5 text-xs text-slate-400 border border-slate-800">
-                        <div><strong class="text-slate-300">👧 Toddler (3.5y):</strong> ${item.toddler}</div>
-                        <div><strong class="text-slate-300">👶 Infant (4mo):</strong> ${item.infant}</div>
+                    <div class="bg-slate-900/60 p-3 rounded-xl space-y-2 text-xs text-slate-400 border border-slate-700/50 mt-4">
+                        <div class="flex items-start gap-2">
+                            <span class="text-pink-400 mt-0.5"><i class="fa-solid fa-child-reaching"></i></span>
+                            <div><strong class="text-slate-200">Toddler (3.5y):</strong> ${item.toddler}</div>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-sky-400 mt-0.5"><i class="fa-solid fa-baby"></i></span>
+                            <div><strong class="text-slate-200">Infant (4mo):</strong> ${item.infant}</div>
+                        </div>
                     </div>
                 `;
                 column.appendChild(card);
